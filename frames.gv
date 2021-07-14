@@ -1,0 +1,19 @@
+digraph G {
+"base_link" -> "bowl_link"[label="Broadcaster: /robot_st_pub\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 219.258 sec old)\nBuffer length: 0.000 sec\n"];
+"base_footprint" -> "base_link"[label="Broadcaster: /robot_st_pub\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 219.258 sec old)\nBuffer length: 0.000 sec\n"];
+"odom" -> "base_footprint"[label="Broadcaster: /gazebo\nAverage rate: 1.250 Hz\nMost recent transform: 219.000 ( 0.258 sec old)\nBuffer length: 4.000 sec\n"];
+"base_link" -> "camera_link"[label="Broadcaster: /robot_st_pub\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 219.258 sec old)\nBuffer length: 0.000 sec\n"];
+"base_link" -> "caster_back_left_link"[label="Broadcaster: /robot_st_pub\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 219.258 sec old)\nBuffer length: 0.000 sec\n"];
+"base_link" -> "caster_back_right_link"[label="Broadcaster: /robot_st_pub\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 219.258 sec old)\nBuffer length: 0.000 sec\n"];
+"base_link" -> "imu_link"[label="Broadcaster: /robot_st_pub\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 219.258 sec old)\nBuffer length: 0.000 sec\n"];
+"base_link" -> "base_scan"[label="Broadcaster: /robot_st_pub\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 219.258 sec old)\nBuffer length: 0.000 sec\n"];
+"ball_link" -> "ball_imu_link"[label="Broadcaster: /ball_st_pub\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 219.258 sec old)\nBuffer length: 0.000 sec\n"];
+"base_ball_link" -> "ball_link"[label="Broadcaster: /ball_st_pub\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 219.258 sec old)\nBuffer length: 0.000 sec\n"];
+"odom" -> "base_ball_link"[label="Broadcaster: /ball_pose_pub\nAverage rate: 10000.000 Hz\nMost recent transform: 0.000 ( 219.258 sec old)\nBuffer length: 0.000 sec\n"];
+"base_link" -> "wheel_left_link"[label="Broadcaster: /robot_st_pub\nAverage rate: 1.250 Hz\nMost recent transform: 219.001 ( 0.257 sec old)\nBuffer length: 4.000 sec\n"];
+"base_link" -> "wheel_right_link"[label="Broadcaster: /robot_st_pub\nAverage rate: 1.250 Hz\nMost recent transform: 219.001 ( 0.257 sec old)\nBuffer length: 4.000 sec\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 219.258"[ shape=plaintext ] ;
+ }->"odom";
+}

@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<robot name="ball" xmlns:xacro="http://ros.org/wiki/xacro">
+<gazebo reference="ball_link">
+    <mu1>0.4</mu1>
+    <mu2>0.4</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <minDepth>0.001</minDepth>
+    <material>Gazebo/Wood</material>
+    <selfCollide>true</selfCollide>
+    <fdir1>0 0 0</fdir1>
+  </gazebo>
+
+<gazebo>
+<plugin name="p3d_base_controller" filename="libgazebo_ros_p3d.so">
+  <alwaysOn>true</alwaysOn>
+  <updateRate>100.0</updateRate>
+  <bodyName>ball_link</bodyName>
+  <frameName>world</frameName>
+  <topicName>/ball/odom</topicName>
+  <gaussianNoise>0.00</gaussianNoise>
+  <xyzOffsets>0 0 0</xyzOffsets>
+  <rpyOffsets>0 0 0</rpyOffsets>
+</plugin>
+</gazebo>
+<gazebo>
+  <plugin name="force_base_controller" filename="libgazebo_ros_f3d.so">
+  <alwaysOn>true</alwaysOn>
+  <updateRate>100.0</updateRate>
+  <bodyName>base_ball_link</bodyName>
+  <topicName>ball/force</topicName>
+  <frameName>base_ball_link</frameName>
+</plugin>
+</gazebo>
+
+
+
+  <gazebo>
+    <plugin name="imu_plugin" filename="libgazebo_ros_imu.so">
+      <alwaysOn>true</alwaysOn>
+      <updateRate>1000.0</updateRate>
+      <bodyName>ball_imu_link</bodyName>
+      <frameName>ball_imu_link</frameName>
+      <topicName>ball/imu</topicName>
+      <serviceName>ball_imu_service</serviceName>
+      <gaussianNoise>0.0</gaussianNoise>
+    </plugin>
+  </gazebo>
+
+<gazebo reference="ball_imu_link">
+<gravity>true</gravity>
+<sensor name="imu_sensor" type="imu">
+  <always_on>true</always_on>
+  <update_rate>1000</update_rate>
+  <visualize>true</visualize>
+  <topic>__default_topic__</topic>
+  <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+    <topicName>ball/imu_sensor</topicName>
+    <bodyName>ball_imu_link</bodyName>
+    <updateRateHZ>1000.0</updateRateHZ>
+    <gaussianNoise>0.0</gaussianNoise>
+    <xyzOffset>0 0 0</xyzOffset>
+    <rpyOffset>0 0 0</rpyOffset>
+    <frameName>ball_imu_link</frameName>
+    <initialOrientationAsReference>false</initialOrientationAsReference>
+  </plugin>
+  <pose>0 0 0 0 0 0</pose>
+</sensor>
+</gazebo>
+
+</robot>

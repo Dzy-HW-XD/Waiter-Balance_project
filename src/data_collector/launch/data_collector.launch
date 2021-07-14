@@ -1,0 +1,4 @@
+<launch>
+<node pkg="data_collector" name="ball_pose_pub" type="tf_PositionOfBall_pub.py" output="screen"/>
+<node pkg="data_collector" name="tf_listener" type="tf_relativePositionOfBall_sub.py" output="screen"/>
+</launch>

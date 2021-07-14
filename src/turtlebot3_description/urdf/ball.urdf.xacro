@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<robot name="ball" xmlns:xacro="http://ros.org/wiki/xacro">
+ <xacro:include filename="$(find turtlebot3_description)/urdf/ball.gazebo.xacro"/>\
+
+<link name="base_ball_link"/>
+<joint name="base_ball_joint" type="fixed">
+ <origin xyz="0 0 0" rpy="0 0 0"/>
+      <parent link="base_ball_link"/>
+      <child link="ball_link"/>
+</joint>
+<link name="ball_link">
+     <visual>
+      <origin xyz="0 0 0" rpy="0.0 -0.0 0.0"/>
+      <geometry>
+            <sphere radius="0.015"/>
+      </geometry>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 -0 0"/>
+      <geometry>
+            <sphere radius="0.015"/>
+      </geometry>
+      <surface>
+            <friction>
+                  <torsional>
+                        <coefficient>10</coefficient>
+                        <patch_radius>0</patch_radius>
+                        <surface_radius>0</surface_radius>
+                        <use_patch_radius>1</use_patch_radius>
+                  </torsional>
+            </friction>
+          </surface>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" />
+      <mass value="0.00001" />
+      <inertia ixx="1e-9" ixy="0.0" ixz="0.0"
+               iyy="1e-9" iyz="0.0"
+               izz="1e-9" />
+      </inertial>
+</link>
+
+
+<joint name="ball_imu_link" type="fixed">
+ <origin xyz="0 0 0" rpy="0 0 0"/>
+      <parent link="ball_link"/>
+      <child link="ball_imu_link"/>
+</joint>
+<link name="ball_imu_link"/>
+</robot>

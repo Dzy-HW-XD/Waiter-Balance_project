@@ -1,2 +1,2 @@
-pysdf:turtlebot3_simulations/turtlebot3_fake:turtlebot3_simulations/turtlebot3_gazebo:turtlebot3_simulations/turtlebot3_simulations
+data_collector:openai_ros/openai_ros:pysdf:turtlebot3_control:turtlebot3_simulations/turtlebot3_fake:turtlebot3_simulations/turtlebot3_gazebo:turtlebot3_simulations/turtlebot3_simulations:turtlebot3_teleop
 -DCATKIN_DEVEL_PREFIX=/home/ziyudu/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/ziyudu/catkin_ws/install -G Unix Makefiles

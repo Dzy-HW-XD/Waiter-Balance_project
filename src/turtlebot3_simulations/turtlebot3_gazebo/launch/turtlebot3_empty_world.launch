@@ -1,11 +1,12 @@
 <launch>
   <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
+  <arg name="ball_model" value="ball"/>
   <arg name="x_pos" default="0.0"/>
   <arg name="y_pos" default="0.0"/>
   <arg name="z_pos" default="0.0"/>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find turtlebot3_gazebo)/worlds/empty_ball.world"/>
+    <arg name="world_name" value="$(find turtlebot3_gazebo)/worlds/empty.world"/>
     <arg name="paused" value="true"/>
     <arg name="use_sim_time" value="true"/>
     <arg name="gui" value="true"/>
@@ -13,7 +14,24 @@
     <arg name="debug" value="false"/>
   </include>
 
-  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro" />
 
-  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model turtlebot3_$(arg model) -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" />
+<param name="robot_description" command="$(find xacro)/xacro --inorder $(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro" />
+<node pkg="gazebo_ros" type="spawn_model" name="turtlebot3_urdf" respawn="false" args="-urdf -model turtlebot3_$(arg model) -reference_frame world -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description "/>
+<node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_st_pub">
+   </node>
+    
+<param name="robot_description1" command="$(find xacro)/xacro --inorder $(find turtlebot3_description)/urdf/ball.urdf.xacro" />
+    <node pkg="gazebo_ros" type="spawn_model" name="ball_urdf" respawn="false" args="-urdf -model ball -reference_frame world -x -0.050 -y 0.0 -z 0.2 -param robot_description1 "/>
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="ball_st_pub">
+          <remap from="robot_description" to="robot_description1" />
+   </node>
+   
+<node pkg="data_collector" name="ball_pose_pub" type="tf_PositionOfBall_pub.py" output="screen"/>
+<node pkg="data_collector" name="tf_listener" type="tf_relativePositionOfBall_sub.py" output="screen"/>
+<node pkg="data_collector" name="ball_vel_node" type="BallVelocity.py" output="screen"/>
+<node pkg="data_collector" name="data_collector_pub" type="data_collector_pub.py" output="screen"/>
+
+
+
+
 </launch>
